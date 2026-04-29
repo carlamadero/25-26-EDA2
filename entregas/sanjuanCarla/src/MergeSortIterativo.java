@@ -1,39 +1,19 @@
 import java.util.Arrays;
 
-public class MergeSortConTraza {
-
-    static int recursionDepth = 0;
+public class MergeSortIterativo {
 
     public static void main(String[] args) {
-        int[] arrayRecursivo = {5, 2, 8, 1, 9, 3};
-        System.out.println("=== INICIO MERGE SORT RECURSIVO ===");
-        System.out.println("Inicial: " + Arrays.toString(arrayRecursivo));
-        ordenarRecursivo(arrayRecursivo, 0, arrayRecursivo.length - 1);
-        System.out.println("Final: " + Arrays.toString(arrayRecursivo) + "\n");
-
-        int[] arrayIterativo = {5, 2, 8, 1, 9, 3};
-        System.out.println("=== INICIO MERGE SORT ITERATIVO ===");
-        System.out.println("Inicial: " + Arrays.toString(arrayIterativo));
-        ordenarIterativo(arrayIterativo);
-        System.out.println("Final: " + Arrays.toString(arrayIterativo));
-    }
-
-    static void ordenarRecursivo(int[] array, int izquierda, int derecha) {
-        if (izquierda >= derecha) return;
-
-        System.out.println(indent() + "Dividiendo: izq=" + izquierda + ", der=" + derecha);
-        recursionDepth++;
-
-        int medio = izquierda + (derecha - izquierda) / 2;
+        int[] array = {5, 2, 8, 1, 9, 3};
         
-        ordenarRecursivo(array, izquierda, medio);
-        ordenarRecursivo(array, medio + 1, derecha);
-        fusionar(array, izquierda, medio, derecha);
-
-        recursionDepth--;
+        System.out.println("=== INICIO MERGE SORT ITERATIVO ===");
+        System.out.println("Inicial: " + Arrays.toString(array));
+        
+        ordenar(array);
+        
+        System.out.println("Final: " + Arrays.toString(array));
     }
 
-    static void ordenarIterativo(int[] array) {
+    static void ordenar(int[] array) {
         int n = array.length;
         for (int tamano = 1; tamano < n; tamano *= 2) {
             System.out.println("Pasadas para tamaño: " + tamano);
@@ -67,10 +47,6 @@ public class MergeSortConTraza {
         while (i < tamanoIzquierda) array[k++] = mitadIzquierda[i++];
         while (j < tamanoDerecha) array[k++] = mitadDerecha[j++];
         
-        System.out.println(indent() + "Fusionados izq=" + izquierda + " a der=" + derecha + " -> " + Arrays.toString(array));
-    }
-
-    static String indent() {
-        return "  ".repeat(Math.max(0, recursionDepth));
+        System.out.println("  Fusionados izq=" + izquierda + " a der=" + derecha + " -> " + Arrays.toString(array));
     }
 }
